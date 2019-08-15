@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NavController, ModalController } from '@ionic/angular';
+import { NavController, ModalController, ActionSheetController } from '@ionic/angular';
 import { PlacesService } from '../../places.service';
 import { Place } from '../../place.model';
 import { CreateBookingComponent } from 'src/app/bookings/create-booking/create-booking.component';
@@ -19,7 +19,8 @@ export class PlaceDetailPage implements OnInit {
     private navController: NavController,
     private route: ActivatedRoute,
     private svcPlaces: PlacesService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private actionSheetController: ActionSheetController
     ) {}
 
   ngOnInit() {
@@ -35,6 +36,34 @@ export class PlaceDetailPage implements OnInit {
 
 
   onBookPlace() {
+
+    this.actionSheetController.create({
+      header: 'Choose an Action',
+      buttons: [
+        {
+          text: 'Select Date',
+          handler: () => {this.openBookingModal('select')}
+        },
+        {
+          text: 'Random Date',
+          handler: () => {this.openBookingModal('random')}
+        },
+        {
+          text: 'Cancel',
+          role: 'destructive'
+        }
+      ]
+    }).then(
+      actionEl => {
+        actionEl.present();
+      }
+    );
+
+  }
+
+  // Params must be one of those two strings.
+  openBookingModal(mode: 'select' | 'random') {
+
     this.modalController.create(
       {
         component: CreateBookingComponent, 
@@ -51,6 +80,7 @@ export class PlaceDetailPage implements OnInit {
       .then( resultData => {
         console.log(resultData);
       });
+
   }
 
 }

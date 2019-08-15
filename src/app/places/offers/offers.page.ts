@@ -16,4 +16,8 @@ export class OffersPage implements OnInit {
     this.loadedOffers = this.svcOffers.getAllOffers();
   }
 
+  onEdit(id: string) {
+    console.log(id);
+  }
+  
 }

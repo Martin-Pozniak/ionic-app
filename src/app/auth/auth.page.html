@@ -1,10 +1,67 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Welcome to PairBnB</ion-title>
+    <ion-title>{{ isLogin ? 'Login' : 'Signup'}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-button (click)="onLogin()" color="primary">Login</ion-button>
+<ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="8" offset-md="2">
+            <ion-list>
+              <ion-item>
+                <ion-label position="floating">
+                  E-Mail
+                </ion-label>
+                <ion-input 
+                  type="email" 
+                  name="email"
+                  required
+                  email
+                  ngModel
+                ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">
+                  Password
+                </ion-label>
+                <ion-input 
+                  type="password"
+                  name="password" 
+                  required
+                  minlength="5"
+                  ngModel
+                ></ion-input>
+              </ion-item>
+              
+            </ion-list>
+          </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-md="8" offset-md="2">
 
+          <ion-button 
+            type="button" 
+            color="primary" 
+            fill="clear" 
+            expand="block"
+            (click)="onSwitchAuthMode()">
+              Switch to {{isLogin ? 'Signup' : 'Login'}}
+          </ion-button>
+
+          <ion-button 
+            type="submit" 
+            (click)="onLogin()" 
+            fill="outline" 
+            color="primary" 
+            expand="block">
+              Login
+          </ion-button>
+ 
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  
 </ion-content>

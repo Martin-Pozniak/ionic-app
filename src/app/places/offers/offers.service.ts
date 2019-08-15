@@ -18,6 +18,17 @@ export class OffersService {
           49
       ),
       ["John\'s Booking", "Phil's Booking"]
+    ),
+    new Offer(
+      'o2',
+      new Place(
+         'mp1',
+          "Brian\'s place",
+          'A Nice Place Offered By Brian',
+          'https://cdn.vox-cdn.com/thumbor/JHUgAnh5jE8oCvwUkNEWV2pUIvI=/0x0:4104x3218/1200x800/filters:focal(1871x1107:2527x1763)/cdn.vox-cdn.com/uploads/chorus_image/image/63277910/2.0.jpg',
+          79
+      ),
+      ["John\'s Booking", "Phil's Booking", "Maria's Booking"]
     )
   ];
 

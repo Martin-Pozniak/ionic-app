@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BookingService } from './booking.service';
+import { Booking } from './booking.model';
 
 @Component({
   selector: 'app-bookings',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookingsPage implements OnInit {
 
-  constructor() { }
+  loadedBookings: Booking[] = [];
+  constructor(private svcBookings: BookingService) { }
 
   ngOnInit() {
+    // Uses the getter inside the thing
+    this.loadedBookings = this.svcBookings.bookings;
+  }
+
+  onCancelBooking(id: string) {
+    console.log(this.loadedBookings);
+    console.log("Removing " +id)
+
+    this.loadedBookings = this.loadedBookings.filter(booking => {
+      console.log(id + " vs " + booking.id);
+      return booking.id !== id;
+    });
+
+    console.log(this.loadedBookings);
+
   }
 
 }
